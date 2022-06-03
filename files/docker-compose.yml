@@ -20,7 +20,6 @@ services:
     networks:
       - default
       - proxy
-
 networks:
   proxy:
     external: true
