@@ -6,8 +6,6 @@
     mode: "0755"
     recurse: yes
   with_items:
-    - /etc/caddy2
-    - /var/caddy2
     - /opt/docker-compose-service/caddy
 
 - name: Put docker-compose.yml
@@ -19,7 +17,7 @@
 - name: Put init.json
   template:
     src: templates/caddy_init.json.j2
-    dest: /etc/caddy2/init.json
+    dest: /opt/docker-compose-service/caddy/init.json
   notify: Restart caddy
 
 - name: Start caddy
