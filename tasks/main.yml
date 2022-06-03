@@ -1,0 +1,29 @@
+---
+- name: Mkdir for caddy2
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+    recursive: yes
+  items:
+    - /etc/caddy2
+    - /var/caddy2
+    - /opt/docker-compose-service/caddy
+
+- name: Put docker-compose.yml
+  copy:
+    src: docker-compose.yml
+    dest: /opt/docker-compose-service/caddy/docker-compose.yml
+  notify: Restart caddy
+
+- name: Put init.json
+  template:
+    src: templates/caddy_init.json.j2
+    dest: /etc/caddy2/init.json
+  notify: Restart caddy
+
+- name: Start caddy
+  systemd:
+    name: docker-compose-service@caddy
+    enabled: yes
+    state: started

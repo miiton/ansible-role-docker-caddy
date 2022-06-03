@@ -1,0 +1,38 @@
+{
+  "admin": {
+    "listen": "0.0.0.0:2019"
+  },
+  "apps": {
+    "http": {
+      "http_port": 80,
+      "https_port": 443,
+      "servers": {
+        "saba": {
+          "listen": [
+            ":443"
+          ],
+          "logs": {
+            "logger_names": {
+              "": ""
+            }
+          },
+          "routes": []
+        }
+      }
+    },
+    "tls": {
+      "automation": {
+        "policies": [
+          {
+            "issuers": [
+              {
+                "email": "{{ letsencrypt_email }}",
+                "module": "acme"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

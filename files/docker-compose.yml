@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  caddy:
+    image: caddy:2
+    ports:
+      - 80:80
+      - 443:443
+      - 2019:2019
+    volumes:
+      - "/etc/caddy2/init.json:/config/caddy/init.json"
+      - "/etc/caddy2/autosave.json:/config/caddy/autosave.json"
+      - "/var/caddy2:/data"
+      - "/var/www:/var/www"
+    logging:
+      options:
+        max-size: "10k"
+        max-file: "5"
+    command: ["caddy", "run", "--config", "/config/caddy/init.json", "--resume"]
+    networks:
+      - default
+      - proxy
+
+networks:
+  proxy:
+    external: true

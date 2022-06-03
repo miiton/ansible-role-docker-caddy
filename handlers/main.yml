@@ -1,0 +1,7 @@
+---
+- name: Restart caddy
+  systemd:
+    name: docker-compose-service@caddy
+    state: restarted
+    enabled: yes
+    daemon_reload: yes
