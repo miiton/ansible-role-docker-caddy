@@ -30,3 +30,9 @@
     name: docker-compose-service@caddy
     enabled: yes
     state: started
+    
+- name: Change permission certdir
+  community.docker.docker_container_exec:
+    container: caddy
+    command: |
+      /bin/sh chmod -R 755 /data/caddy/certificates
