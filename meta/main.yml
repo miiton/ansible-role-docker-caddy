@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: miiton
-  description: Caddy2 web server on docker
+  description: Caddy web server on docker
   company: "miiton"
   license: "MIT"
   min_ansible_version: "2.9"
@@ -18,3 +18,5 @@ dependencies:
   - name: docker
     src: git+git@github.com:miiton/ansible-role-docker.git
     version: main
+
+allow_duplicates: false

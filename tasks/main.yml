@@ -1,5 +1,5 @@
 ---
-- name: Mkdir for caddy2
+- name: Mkdir for caddy
   file:
     path: "{{ item }}"
     state: directory
