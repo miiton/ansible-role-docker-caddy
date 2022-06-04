@@ -23,6 +23,7 @@ services:
       - proxy
 volumes:
   caddy:
+    external: true
 networks:
   proxy:
     external: true
