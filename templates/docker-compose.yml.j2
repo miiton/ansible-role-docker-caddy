@@ -13,10 +13,21 @@ services:
       - "caddy:/config"
       - "caddy:/data"
       - "/var/www:/var/www"
+{% if loki_host == "" %}
     logging:
       options:
         max-size: "10k"
         max-file: "5"
+{% else %}
+    logging:
+      driver: loki
+      options:
+        loki-url: https://{{ loki_host }}/loki/api/v1/push
+        loki-tenant-id: {{ loki_tenant_id }}
+        loki-external-labels: {% raw %}"container_name={{.Name}},role=webserver"{% endraw %}
+        max-size: "10k"
+        max-file: "5"
+{% endif %}
     command: ["caddy", "run", "--config", "/init.json", "--resume"]
     networks:
       - default
