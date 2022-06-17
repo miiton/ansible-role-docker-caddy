@@ -37,6 +37,11 @@ services:
           - drop:
               source: "host"
               value: "{{ loki_host }}"
+{%   if grafana_host != "" %}
+          - drop:
+              source: "host"
+              value: "{{ grafana_host }}"
+{%   endif %}
         loki-external-labels: {% raw %}"container_name={{.Name}},role=webserver"{% endraw %}
 
 {% endif %}
